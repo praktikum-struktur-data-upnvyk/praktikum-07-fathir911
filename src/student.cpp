@@ -67,7 +67,13 @@ using namespace std;
 //     preorder(&satu);      // mencetak:  42
 // =============================================================================
 void preorder(const Node* root) {
-}
+    if (root == NULL) {
+        return;
+    }
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}   
 
 // =============================================================================
 // SOAL 1b — inorder                                                    20 poin
@@ -90,8 +96,14 @@ void preorder(const Node* root) {
 //     inorder(NULL);     // tidak mencetak apa pun
 // =============================================================================
 void inorder(const Node* root) {
-}
+    if (root == NULL) {
+        return;
+    }
 
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
 // =============================================================================
 // SOAL 1c — postorder                                                  20 poin
 // =============================================================================
@@ -114,8 +126,13 @@ void inorder(const Node* root) {
 //     postorder(NULL);   // tidak mencetak apa pun
 // =============================================================================
 void postorder(const Node* root) {
+    if (root == NULL) {
+        return;
+    }
+        postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
 }
-
 // =============================================================================
 // SOAL 2b — clear                                                      25 poin
 // =============================================================================
@@ -140,8 +157,16 @@ void postorder(const Node* root) {
 //     clear(root);              // aman, tidak terjadi apa-apa
 // =============================================================================
 void clear(Node*& root) {
-}
+    if (root == NULL) {
+        return;
+    }
 
+    clear(root->left);
+    clear(root->right);
+
+    delete root;
+    root = NULL;
+}
 // =============================================================================
 // SOAL 3 — jumlahDaun                          SOAL CERITA             15 poin
 // =============================================================================
@@ -177,9 +202,16 @@ void clear(Node*& root) {
 //     3                           masih punya satu cabang)
 // =============================================================================
 int jumlahDaun(const Node* root) {
-    return 0;
-}
+    if (root == NULL) {
+        return 0;
+    }
 
+    if (root->left == NULL && root->right == NULL) {
+        return 1;
+    }
+
+    return jumlahDaun(root->left) + jumlahDaun(root->right);
+}
 // =============================================================================
 // MAIN() — program Anda sendiri. TIDAK dinilai, bebas diubah.
 // =============================================================================
